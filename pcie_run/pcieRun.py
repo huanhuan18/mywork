@@ -49,7 +49,7 @@ class Run():
             # 获取Android路径
             AndroidCasePath = "/data/keyFrameRun" + version
             # 插入数据库
-            record = sqlDeal.insertTask(caseType)
+            record = sqlDeal.insertTask(version, 'keyframe', caseType, ip, user)
             # 将用例push到手机
             cmd = ["adb -s {} push {} {}".format(deviceNum, server_case_path, AndroidCasePath)]
             subprocess.call(cmd)
@@ -76,3 +76,5 @@ class Run():
                 os.makedirs(backup_path)
             cmd = ["adb -s {} pull {} {}".format(deviceNum, AndroidCasePath, backup_path)]
             subprocess.call(cmd)
+
+            sqlDeal.updateTask(taskid[0])
