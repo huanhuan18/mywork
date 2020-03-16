@@ -29,3 +29,7 @@ def main():
             i += 1
     else:
         print("please enter deviceNum!")
+        
+        
+if __name__ == "__main__":
+    main()
