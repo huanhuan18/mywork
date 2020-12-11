@@ -15,7 +15,7 @@ logging.info(the_params)
 # 获取设备号
 a = os.popen("adb devices")
 b = a.read()
-deviceNum = b.split("")[4]
+deviceNum = b.split()[4]
 logging.info("deviceNum is {}".format(deviceNum))
 
 for i in range(len(the_params)):
