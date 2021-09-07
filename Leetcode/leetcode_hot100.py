@@ -56,6 +56,29 @@ def combinationSum(nums: List[int], target: int) -> List[List[int]]:
     return res
 
 
+def trapRainWater(height: List[int]) -> int:
+    """42.接雨水"""
+    """单调递减栈"""
+    n = len(height)
+    stack = []
+    res = 0
+    curIndex = 0
+    while curIndex < n:
+        # 当栈不为空且curIndex的值大于顶元素时，即违背单调递减的情况
+        while (len(stack) > 0 and height[curIndex] > height[stack[-1]]):
+            top = stack.pop()
+            if len(stack) <= 0:
+                break
+            # 如果栈内有元素，求面积
+            h = min(height[stack[-1]], height[curIndex]) - height[top]
+            dist = curIndex - stack[-1] - 1
+            res += dist * h
+        stack.append(curIndex)
+        curIndex += 1
+    return res
+
+
 if __name__ == '__main__':
     # print("binarySearch", binarySearch([5, 7, 7, 8, 8, 10], 8))
-    print("combinationSum", combinationSum([2, 3, 6, 7], 7))
+    # print("combinationSum", combinationSum([2, 3, 6, 7], 7))
+    print("trapRainWater", trapRainWater([0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1]))
